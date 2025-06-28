@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1924 Mill Order Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Optional custom styles for better readability or spacing */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f8f8;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .product-item {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+        }
+        .product-item label {
+            flex: 1;
+            min-width: 200px; /* Adjust as needed */
+            font-weight: 600;
+        }
+        .product-item input[type="number"],
+        .product-item select {
+            width: 100px; /* Fixed width for quantity */
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .product-item .price-display {
+            width: 100px;
+            text-align: right;
+            font-weight: 600;
+        }
+        .total-section {
+            text-align: right;
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #e0e0e0;
+        }
+        .notes-section {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body class="p-4">
+    <div class="container">
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">1924 Mill - Order Form</h1>
+            <p class="text-gray-600 mt-2">Goodness of tradition to today’s conscious kitchens!</p>
+        </div>
+
+        <div class="prose max-w-none text-gray-700 mb-8 leading-relaxed">
+            <p>Hi Neighbour,</p>
+
+            <p><strong>1924 Mill</strong> is a premium food essentials brand rooted in the 100-year legacy of Dharmaprakash Mills in Mangalore. We deliver fresh, stone-ground flours and naturally filtered oils, including coconut and gingelly oil that blend time-honored purity with modern-day convenience, bringing the goodness of tradition to today’s conscious kitchens.</p>
+
+            <p>From the finest <strong>Sharbati Atta</strong> to stone-ground <strong>Ragi, Jowar, and Bajra</strong>, and our naturally filtered <strong>coconut and gingelly oil</strong>, we serve you the ingredients your kitchen deserves.</p>
+            <ul>
+                <li>No preservatives.</li>
+                <li>No middlemen.</li>
+                <li>Just wholesome, honest food.</li>
+            </ul>
+            <p>Now available via easy monthly subscriptions. Because tradition should be effortless.</p>
+            <p class="text-lg font-semibold text-green-700">Ready to Join the Grain Gang? Subscribe now - fill in the form below.</p>
+
+            <p>Let’s make every meal a little tastier and a lot healthier. Plus, you’ll be supporting a piece of history (and impressing your foodie friends)!</p>
+
+            <div class="bg-blue-50 border-l-4 border-blue-400 text-blue-700 p-3 mt-4" role="alert">
+                <p><strong>Order By:</strong> 25th of every month</p>
+                <p><strong>Delivery Date:</strong> 5th of every month</p>
+            </div>
+
+            <p class="mt-4">Warmly,<br>Archana Acharya<br>B21 Chestnut B<br>WhatsApp No: <a href="https://wa.me/919980988114" class="text-green-600 hover:underline">+91 9980988114</a></p>
+        </div>
+
+        <hr class="my-8">
+
+        <form id="orderForm" class="space-y-6">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Your Details</h2>
+            <div>
+                <label for="customerEmail" class="block text-sm font-medium text-gray-700">Email ID <span class="text-red-500">*</span></label>
+                <input type="email" id="customerEmail" name="customerEmail" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            </div>
+            <div>
+                <label for="purchaseDate" class="block text-sm font-medium text-gray-700">Date of Purchase</label>
+                <input type="text" id="purchaseDate" name="purchaseDate" readonly
+                       class="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm sm:text-sm">
+            </div>
+            <div>
+                <label for="customerName" class="block text-sm font-medium text-gray-700">Your Full Name <span class="text-red-500">*</span></label>
+                <input type="text" id="customerName" name="customerName" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            </div>
+            <div>
+                <label for="customerContact" class="block text-sm font-medium text-gray-700">Contact Number <span class="text-red-500">*</span></label>
+                <input type="tel" id="customerContact" name="customerContact" required
+                       pattern="[0-9]{10}" title="Please enter a 10-digit phone number"
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="blockName" class="block text-sm font-medium text-gray-700">Block Name <span class="text-red-500">*</span></label>
+                    <input type="text" id="blockName" name="blockName" required
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+                <div>
+                    <label for="doorNumber" class="block text-sm font-medium text-gray-700">Door Number <span class="text-red-500">*</span></label>
+                    <input type="text" id="doorNumber" name="doorNumber" required
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+            </div>
+
+            <hr class="my-8">
+
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Select Products</h2>
+
+            <div id="productsList" class="space-y-4">
+                <div class="product-item">
+                    <label for="sharbatiAttaQuantity">Sharbati Atta - Stone Ground (Rs 100/kg)</label>
+                    <input type="number" id="sharbatiAttaQuantity" data-price="100" min="0" value="0" class="product-quantity">
+                    <span class="text-sm text-gray-600">Kgs</span>
+                    <select id="sharbatiAttaGrind" class="flex-grow min-w-[100px] p-2 border border-gray-300 rounded-md">
+                        <option value="fine">Fine Ground</option>
+                        <option value="coarse">Coarse Ground</option>
+                    </select>
+                    <span class="price-display">₹<span id="sharbatiAttaTotal">0</span></span>
+                </div>
+
+                <div class="product-item">
+                    <label for="ragiPowderQuantity">Ragi Powder (Rs 100/kg)</label>
+                    <input type="number" id="ragiPowderQuantity" data-price="100" min="0" value="0" class="product-quantity">
+                    <span class="text-sm text-gray-600">Kgs</span>
+                    <span class="price-display">₹<span id="ragiPowderTotal">0</span></span>
+                </div>
+
+                <div class="product-item">
+                    <label for="jowarPowderQuantity">Jowar Powder (Rs 120/kg)</label>
+                    <input type="number" id="jowarPowderQuantity" data-price="120" min="0" value="0" class="product-quantity">
+                    <span class="text-sm text-gray-600">Kgs</span>
+                    <span class="price-display">₹<span id="jowarPowderTotal">0</span></span>
+                </div>
+
+                <div class="product-item">
+                    <label for="bajraPowderQuantity">Bajra Powder (Rs 110/kg)</label>
+                    <input type="number" id="bajraPowderQuantity" data-price="110" min="0" value="0" class="product-quantity">
+                    <span class="text-sm text-gray-600">Kgs</span>
+                    <span class="price-display">₹<span id="bajraPowderTotal">0</span></span>
+                </div>
+
+                <div class="product-item">
+                    <label for="ricePowderQuantity">Rice Powder (Rs 100/kg)</label>
+                    <input type="number" id="ricePowderQuantity" data-price="100" min="0" value="0" class="product-quantity">
+                    <span class="text-sm text-gray-600">Kgs</span>
+                    <span class="price-display">₹<span id="ricePowderTotal">0</span></span>
+                </div>
+
+                <div class="product-item">
+                    <label for="coconutOilQuantity">Coconut Oil - Cold Press (Rs 535/liter)</label>
+                    <input type="number" id="coconutOilQuantity" data-price="535" min="0" value="0" class="product-quantity">
+                    <span class="text-sm text-gray-600">Litres</span>
+                    <span class="price-display">₹<span id="coconutOilTotal">0</span></span>
+                </div>
+
+                <div class="product-item">
+                    <label for="gingellyOilQuantity">Gingelly Oil (Rs 530/liter)</label>
+                    <input type="number" id="gingellyOilQuantity" data-price="530" min="0" value="0" class="product-quantity">
+                    <span class="text-sm text-gray-600">Litres</span>
+                    <span class="price-display">₹<span id="gingellyOilTotal">0</span></span>
+                </div>
+            </div>
+
+            <div class="total-section">
+                Total Amount: ₹<span id="grandTotal">0</span>
+            </div>
+
+            <div class="notes-section">
+                <p>Please note: Quantities should be entered in whole numbers (Kgs/Litres). If you don't need a product, leave its quantity as 0.</p>
+            </div>
+
+            <button type="submit"
+                    class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:shadow-outline transition duration-200">
+                Place Order
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Set default purchase date to current IST
+        document.addEventListener('DOMContentLoaded', () => {
+            const purchaseDateInput = document.getElementById('purchaseDate');
+            const now = new Date();
+            const options = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                timeZoneName: 'short',
+                timeZone: 'Asia/Kolkata' // IST
+            };
+            purchaseDateInput.value = now.toLocaleString('en-IN', options);
+
+            const productQuantities = document.querySelectorAll('.product-quantity');
+            const grandTotalSpan = document.getElementById('grandTotal');
+
+            function calculateTotal() {
+                let grandTotal = 0;
+                productQuantities.forEach(input => {
+                    const quantity = parseFloat(input.value) || 0;
+                    const price = parseFloat(input.dataset.price);
+                    const productTotal = quantity * price;
+                    document.getElementById(input.id.replace('Quantity', 'Total')).textContent = productTotal.toFixed(0);
+                    grandTotal += productTotal;
+                });
+                grandTotalSpan.textContent = grandTotal.toFixed(0);
+            }
+
+            productQuantities.forEach(input => {
+                input.addEventListener('input', calculateTotal);
+            });
+
+            // Initial calculation on page load
+            calculateTotal();
+
+            // Form Submission Logic
+            const orderForm = document.getElementById('orderForm');
+            orderForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Collect customer details
+                const customerEmail = document.getElementById('customerEmail').value;
+                const purchaseDate = document.getElementById('purchaseDate').value;
+                const customerName = document.getElementById('customerName').value;
+                const customerContact = document.getElementById('customerContact').value;
+                const blockName = document.getElementById('blockName').value;
+                const doorNumber = document.getElementById('doorNumber').value;
+
+                // Collect product details
+                let orderDetails = [];
+                productQuantities.forEach(input => {
+                    const quantity = parseFloat(input.value);
+                    if (quantity > 0) {
+                        const productName = input.id.replace('Quantity', '').replace(/([A-Z])/g, ' $1').trim(); // Convert camelCase to readable
+                        const pricePerUnit = parseFloat(input.dataset.price);
+                        const productTotal = quantity * pricePerUnit;
+                        let productString = `${productName}: ${quantity} `;
+
+                        if (productName.includes('Oil')) {
+                            productString += 'Litres';
+                        } else {
+                            productString += 'Kgs';
+                        }
+                        productString += ` @ ₹${pricePerUnit}/unit = ₹${productTotal.toFixed(0)}`;
+
+                        // Special handling for Sharbati Atta grind
+                        if (input.id === 'sharbatiAttaQuantity') {
+                            const grindOption = document.getElementById('sharbatiAttaGrind').value;
+                            productString += ` (${grindOption.charAt(0).toUpperCase() + grindOption.slice(1)} Ground)`;
+                        }
+
+                        orderDetails.push(productString);
+                    }
+                });
+
+                const grandTotal = document.getElementById('grandTotal').textContent;
+
+                // Construct message for WhatsApp/Email
+                let message = `*1924 Mill Order Details*\n\n`;
+                message += `*Customer Details:*\n`;
+                message += `Email: ${customerEmail}\n`;
+                message += `Date: ${purchaseDate}\n`;
+                message += `Name: ${customerName}\n`;
+                message += `Contact: ${customerContact}\n`;
+                message += `Address: ${blockName}, ${doorNumber}\n\n`;
+
+                message += `*Products Ordered:*\n`;
+                if (orderDetails.length > 0) {
+                    message += orderDetails.join('\n') + '\n\n';
+                } else {
+                    message += 'No products selected.\n\n';
+                }
+
+                message += `*Grand Total: ₹${grandTotal}*\n\n`;
+                message += `_Thank you for your order with 1924 Mill!_`;
+
+
+                // Option 1: Display in an alert (for testing)
+                // alert(message);
+
+                // Option 2: Open WhatsApp chat
+                const whatsappNumber = "919980988114"; // Archana's WhatsApp number
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+
+                // Option 3: You could also consider sending this data to a backend server
+                // if you had one set up to receive form submissions and store them or send emails.
+                // For a Google Form like experience, you would typically need a Google Apps Script
+                // or similar backend to process this HTML form data.
+            });
+        });
+    </script>
+</body>
+</html>
