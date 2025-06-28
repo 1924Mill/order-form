@@ -59,10 +59,22 @@
             color: #666;
             margin-top: 1rem;
         }
+        /* Style for the logo */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem; /* Space below the logo */
+        }
+        .logo-container img {
+            max-width: 200px; /* Adjust max-width as needed */
+            height: auto;
+        }
     </style>
 </head>
 <body class="p-4">
     <div class="container">
+        <div class="logo-container">
+            <img src="images/1924Mill_Logo_900ppi_V6_New.png" alt="1924 Mill Logo">
+        </div>
         <div class="text-center mb-6">
             <h1 class="text-3xl font-bold text-gray-800">1924 Mill - Order Form</h1>
             <p class="text-gray-600 mt-2">Goodness of tradition to today’s conscious kitchens!</p>
@@ -136,6 +148,7 @@
 
             <div id="productsList" class="space-y-4">
                 <div class="product-item">
+                    <img src="https://via.placeholder.com/80x80?text=Atta" alt="Sharbati Atta" class="w-20 h-20 object-cover mr-4">
                     <label for="sharbatiAttaQuantity">Sharbati Atta - Stone Ground (Rs 100/kg)</label>
                     <input type="number" id="sharbatiAttaQuantity" data-price="100" min="0" value="0" class="product-quantity">
                     <span class="text-sm text-gray-600">Kgs</span>
@@ -147,6 +160,7 @@
                 </div>
 
                 <div class="product-item">
+                    <img src="https://via.placeholder.com/80x80?text=Ragi" alt="Ragi Powder" class="w-20 h-20 object-cover mr-4">
                     <label for="ragiPowderQuantity">Ragi Powder (Rs 100/kg)</label>
                     <input type="number" id="ragiPowderQuantity" data-price="100" min="0" value="0" class="product-quantity">
                     <span class="text-sm text-gray-600">Kgs</span>
@@ -154,6 +168,7 @@
                 </div>
 
                 <div class="product-item">
+                    <img src="https://via.placeholder.com/80x80?text=Jowar" alt="Jowar Powder" class="w-20 h-20 object-cover mr-4">
                     <label for="jowarPowderQuantity">Jowar Powder (Rs 120/kg)</label>
                     <input type="number" id="jowarPowderQuantity" data-price="120" min="0" value="0" class="product-quantity">
                     <span class="text-sm text-gray-600">Kgs</span>
@@ -161,6 +176,7 @@
                 </div>
 
                 <div class="product-item">
+                    <img src="https://via.placeholder.com/80x80?text=Bajra" alt="Bajra Powder" class="w-20 h-20 object-cover mr-4">
                     <label for="bajraPowderQuantity">Bajra Powder (Rs 110/kg)</label>
                     <input type="number" id="bajraPowderQuantity" data-price="110" min="0" value="0" class="product-quantity">
                     <span class="text-sm text-gray-600">Kgs</span>
@@ -168,6 +184,7 @@
                 </div>
 
                 <div class="product-item">
+                    <img src="https://via.placeholder.com/80x80?text=Rice" alt="Rice Powder" class="w-20 h-20 object-cover mr-4">
                     <label for="ricePowderQuantity">Rice Powder (Rs 100/kg)</label>
                     <input type="number" id="ricePowderQuantity" data-price="100" min="0" value="0" class="product-quantity">
                     <span class="text-sm text-gray-600">Kgs</span>
@@ -175,6 +192,7 @@
                 </div>
 
                 <div class="product-item">
+                    <img src="https://via.placeholder.com/80x80?text=Coconut+Oil" alt="Coconut Oil" class="w-20 h-20 object-cover mr-4">
                     <label for="coconutOilQuantity">Coconut Oil - Cold Press (Rs 535/liter)</label>
                     <input type="number" id="coconutOilQuantity" data-price="535" min="0" value="0" class="product-quantity">
                     <span class="text-sm text-gray-600">Litres</span>
@@ -182,6 +200,7 @@
                 </div>
 
                 <div class="product-item">
+                    <img src="https://via.placeholder.com/80x80?text=Gingelly+Oil" alt="Gingelly Oil" class="w-20 h-20 object-cover mr-4">
                     <label for="gingellyOilQuantity">Gingelly Oil (Rs 530/liter)</label>
                     <input type="number" id="gingellyOilQuantity" data-price="530" min="0" value="0" class="product-quantity">
                     <span class="text-sm text-gray-600">Litres</span>
@@ -208,6 +227,7 @@
         // Set default purchase date to current IST
         document.addEventListener('DOMContentLoaded', () => {
             const purchaseDateInput = document.getElementById('purchaseDate');
+            // Get current time in IST
             const now = new Date();
             const options = {
                 year: 'numeric',
@@ -261,12 +281,15 @@
                 productQuantities.forEach(input => {
                     const quantity = parseFloat(input.value);
                     if (quantity > 0) {
-                        const productName = input.id.replace('Quantity', '').replace(/([A-Z])/g, ' $1').trim(); // Convert camelCase to readable
+                        // Extract product name from label or ID for better readability
+                        const labelElement = document.querySelector(`label[for="${input.id}"]`);
+                        let productName = labelElement ? labelElement.textContent.split('(')[0].trim() : input.id.replace('Quantity', '').replace(/([A-Z])/g, ' $1').trim();
+
                         const pricePerUnit = parseFloat(input.dataset.price);
                         const productTotal = quantity * pricePerUnit;
                         let productString = `${productName}: ${quantity} `;
 
-                        if (productName.includes('Oil')) {
+                        if (productName.includes('Oil')) { // Using includes as a simple check for oil
                             productString += 'Litres';
                         } else {
                             productString += 'Kgs';
@@ -305,18 +328,9 @@
                 message += `_Thank you for your order with 1924 Mill!_`;
 
 
-                // Option 1: Display in an alert (for testing)
-                // alert(message);
-
-                // Option 2: Open WhatsApp chat
                 const whatsappNumber = "919980988114"; // Archana's WhatsApp number
                 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
                 window.open(whatsappUrl, '_blank');
-
-                // Option 3: You could also consider sending this data to a backend server
-                // if you had one set up to receive form submissions and store them or send emails.
-                // For a Google Form like experience, you would typically need a Google Apps Script
-                // or similar backend to process this HTML form data.
             });
         });
     </script>
