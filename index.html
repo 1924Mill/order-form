@@ -243,6 +243,7 @@
             function calculateTotal() {
                 let grandTotal = 0;
                 productQuantities.forEach(input => {
+                    // Ensure the value is treated as a number; default to 0 if empty or invalid
                     const quantity = parseFloat(input.value) || 0;
                     const price = parseFloat(input.dataset.price);
                     const productTotal = quantity * price;
@@ -253,7 +254,10 @@
             }
 
             productQuantities.forEach(input => {
+                // Listen for 'input' event (real-time as user types, where supported)
                 input.addEventListener('input', calculateTotal);
+                // Listen for 'blur' event (when input loses focus, more reliable on some mobile devices)
+                input.addEventListener('blur', calculateTotal);
             });
 
             // Initial calculation on page load
