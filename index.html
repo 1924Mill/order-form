@@ -219,7 +219,7 @@
         </form>
     </div>
 
-    <script>
+<script>
         // Set default purchase date to current IST
         document.addEventListener('DOMContentLoaded', () => {
             const purchaseDateInput = document.getElementById('purchaseDate');
@@ -296,11 +296,11 @@
                         }
                         productString += ` @ ₹${pricePerUnit}/unit = ₹${productTotal.toFixed(0)}`;
 
-                        // Special handling for Sharbati Atta grind
-                        if (input.id === 'sharbatiAttaQuantity') {
-                            const grindOption = document.getElementById('sharbatiAttaGrind').value;
-                            productString += ` (${grindOption.charAt(0).toUpperCase() + grindOption.slice(1)} Ground)`;
-                        }
+                        // Removed the special handling for Sharbati Atta grind since the select element is removed
+                        // if (input.id === 'sharbatiAttaQuantity') {
+                        //     const grindOption = document.getElementById('sharbatiAttaGrind').value;
+                        //     productString += ` (${grindOption.charAt(0).toUpperCase() + grindOption.slice(1)} Ground)`;
+                        // }
 
                         orderDetails.push(productString);
                     }
