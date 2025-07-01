@@ -4,236 +4,254 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1924 Mill Order Form</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        /* Optional custom styles for better readability or spacing */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f8f8;
+        .hidden {
+            display: none;
         }
-        .container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1.5rem;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        /* Add some transition for smoother display */
+        .fade-in {
+            animation: fadeIn 0.5s;
         }
-        .product-item {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            padding: 0.75rem;
-            border: 1px solid #e0e0e0;
-            border-radius: 6px;
-        }
-        .product-item label {
-            flex: 1;
-            min-width: 200px; /* Adjust as needed */
-            font-weight: 600;
-        }
-        .product-item input[type="number"],
-        .product-item select {
-            width: 100px; /* Fixed width for quantity */
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .product-item .price-display {
-            width: 100px;
-            text-align: right;
-            font-weight: 600;
-        }
-        .total-section {
-            text-align: right;
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 1px dashed #e0e0e0;
-        }
-        .notes-section {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 1rem;
-        }
-        /* Style for the logo */
-        .logo-container {
-            text-align: center;
-            margin-bottom: 2rem; /* Space below the logo */
-        }
-        .logo-container img {
-            max-width: 200px; /* Adjust max-width as needed */
-            height: auto;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
-<body class="p-4">
-    <div class="container">
-        <div class="logo-container">
-            <img src="images/1924Mill_Logo_900ppi_V6_New.png" alt="1924 Mill Logo">
-        </div>
-        <div class="text-center mb-6">
-            <h1 class="text-3xl font-bold text-gray-800">1924 Mill - Order Form</h1>
-            <p class="text-gray-600 mt-2">Goodness of tradition to today’s conscious kitchens!</p>
-        </div>
+<body class="bg-gray-100 font-sans">
+    <div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg my-8">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">1924 Mill Order Form</h1>
 
-        <div class="prose max-w-none text-gray-700 mb-8 leading-relaxed">
-            <p>Hi Neighbour,</p>
+        <div id="messageArea" class="mb-4 p-3 text-sm rounded-md hidden" role="alert"></div>
 
-            <p><strong>1924 Mill</strong> is a premium food essentials brand rooted in the 100-year legacy of Dharmaprakash Mills in Mangalore. We deliver fresh, stone-ground flours and naturally filtered oils, including coconut and gingelly oil that blend time-honored purity with modern-day convenience, bringing the goodness of tradition to today’s conscious kitchens.</p>
-
-            <p>From the finest <strong>Sharbati Atta</strong> to stone-ground <strong>Ragi, Jowar, and Bajra</strong>, and our naturally filtered <strong>coconut and gingelly oil</strong>, we serve you the ingredients your kitchen deserves.</p>
-            <ul>
-                <li>No preservatives.</li>
-                <li>No middlemen.</li>
-                <li>Just wholesome, honest food.</li>
-            </ul>
-            <p>Now available via easy monthly subscriptions. Because tradition should be effortless.</p>
-            <p class="text-lg font-semibold text-green-700">Ready to Join the Grain Gang? Subscribe now - fill in the form below.</p>
-
-            <p>Let’s make every meal a little tastier and a lot healthier. Plus, you’ll be supporting a piece of history (and impressing your foodie friends)!</p>
-
-            <div class="bg-blue-50 border-l-4 border-blue-400 text-blue-700 p-3 mt-4" role="alert">
-                <p><strong>Order By:</strong> 25th of every month</p>
-                <p><strong>Delivery Date:</strong> 5th of every month</p>
-            </div>
-
-            <p class="mt-4">Warmly,<br>Archana Acharya<br>B21 Chestnut B<br>WhatsApp No: <a href="https://wa.me/919980988114" class="text-green-600 hover:underline">+91 9980988114</a></p>
-        </div>
-
-        <hr class="my-8">
-
-        <form id="orderForm" class="space-y-6">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Your Details</h2>
-            <div>
-                <label for="customerEmail" class="block text-sm font-medium text-gray-700">Email ID <span class="text-red-500">*</span></label>
-                <input type="email" id="customerEmail" name="customerEmail" required
-                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-            </div>
-            <div>
-                <label for="purchaseDate" class="block text-sm font-medium text-gray-700">Date of Purchase</label>
-                <input type="text" id="purchaseDate" name="purchaseDate" readonly
-                       class="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm sm:text-sm">
-            </div>
-            <div>
-                <label for="customerName" class="block text-sm font-medium text-gray-700">Your Full Name <span class="text-red-500">*</span></label>
-                <input type="text" id="customerName" name="customerName" required
-                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-            </div>
-            <div>
-                <label for="customerContact" class="block text-sm font-medium text-gray-700">Contact Number <span class="text-red-500">*</span></label>
-                <input type="tel" id="customerContact" name="customerContact" required
-                       pattern="[0-9]{10}" title="Please enter a 10-digit phone number"
-                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div id="loginSection" class="fade-in">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Identify Yourself</h2>
+            <div class="space-y-4">
                 <div>
-                    <label for="blockName" class="block text-sm font-medium text-gray-700">Block Name <span class="text-red-500">*</span></label>
-                    <input type="text" id="blockName" name="blockName" required
+                    <label for="loginEmail" class="block text-sm font-medium text-gray-700">Email Address</label>
+                    <input type="email" id="loginEmail" name="loginEmail" required
                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                 </div>
                 <div>
-                    <label for="doorNumber" class="block text-sm font-medium text-gray-700">Door Number <span class="text-red-500">*</span></label>
-                    <input type="text" id="doorNumber" name="doorNumber" required
+                    <label for="loginBlockName" class="block text-sm font-medium text-gray-700">Block/Building Name</label>
+                    <input type="text" id="loginBlockName" name="loginBlockName" required
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+                <div>
+                    <label for="loginDoorNumber" class="block text-sm font-medium text-gray-700">House Number</label>
+                    <input type="text" id="loginDoorNumber" name="loginDoorNumber" required
                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                 </div>
             </div>
+            <button id="validateBtn"
+                    class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:shadow-outline transition duration-200">
+                Continue
+            </button>
+        </div>
 
-            <hr class="my-8">
-
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Select Products</h2>
-
-            <div id="productsList" class="space-y-4">
-                <div class="product-item">
-                    <img src="https://via.placeholder.com/80x80?text=Atta" alt="Sharbati Atta" class="w-20 h-20 object-cover mr-4">
-                    <label for="sharbatiAttaQuantity">Sharbati Atta - Stone Ground (Rs 100/kg)</label>
-                    <input type="number" id="sharbatiAttaQuantity" data-price="100" min="0" value="0" class="product-quantity">
-                    <span class="text-sm text-gray-600">Kgs</span>
-                    <span class="price-display">₹<span id="sharbatiAttaTotal">0</span></span>
-                </div>
-
-                <div class="product-item">
-                    <img src="https://via.placeholder.com/80x80?text=Ragi" alt="Ragi Powder" class="w-20 h-20 object-cover mr-4">
-                    <label for="ragiPowderQuantity">Ragi Powder (Rs 100/kg)</label>
-                    <input type="number" id="ragiPowderQuantity" data-price="100" min="0" value="0" class="product-quantity">
-                    <span class="text-sm text-gray-600">Kgs</span>
-                    <span class="price-display">₹<span id="ragiPowderTotal">0</span></span>
-                </div>
-
-                <div class="product-item">
-                    <img src="https://via.placeholder.com/80x80?text=Jowar" alt="Jowar Powder" class="w-20 h-20 object-cover mr-4">
-                    <label for="jowarPowderQuantity">Jowar Powder (Rs 120/kg)</label>
-                    <input type="number" id="jowarPowderQuantity" data-price="120" min="0" value="0" class="product-quantity">
-                    <span class="text-sm text-gray-600">Kgs</span>
-                    <span class="price-display">₹<span id="jowarPowderTotal">0</span></span>
-                </div>
-
-                <div class="product-item">
-                    <img src="https://via.placeholder.com/80x80?text=Bajra" alt="Bajra Powder" class="w-20 h-20 object-cover mr-4">
-                    <label for="bajraPowderQuantity">Bajra Powder (Rs 110/kg)</label>
-                    <input type="number" id="bajraPowderQuantity" data-price="110" min="0" value="0" class="product-quantity">
-                    <span class="text-sm text-gray-600">Kgs</span>
-                    <span class="price-display">₹<span id="bajraPowderTotal">0</span></span>
-                </div>
-
-                <div class="product-item">
-                    <img src="https://via.placeholder.com/80x80?text=Rice" alt="Rice Powder" class="w-20 h-20 object-cover mr-4">
-                    <label for="ricePowderQuantity">Rice Powder (Rs 100/kg)</label>
-                    <input type="number" id="ricePowderQuantity" data-price="100" min="0" value="0" class="product-quantity">
-                    <span class="text-sm text-gray-600">Kgs</span>
-                    <span class="price-display">₹<span id="ricePowderTotal">0</span></span>
-                </div>
-
-                <div class="product-item">
-                    <img src="https://via.placeholder.com/80x80?text=Coconut+Oil" alt="Coconut Oil" class="w-20 h-20 object-cover mr-4">
-                    <label for="coconutOilQuantity">Coconut Oil - Cold Press (Rs 535/liter)</label>
-                    <input type="number" id="coconutOilQuantity" data-price="535" min="0" value="0" class="product-quantity">
-                    <span class="text-sm text-gray-600">Litres</span>
-                    <span class="price-display">₹<span id="coconutOilTotal">0</span></span>
-                </div>
-
-                <div class="product-item">
-                    <img src="https://via.placeholder.com/80x80?text=Gingelly+Oil" alt="Gingelly Oil" class="w-20 h-20 object-cover mr-4">
-                    <label for="gingellyOilQuantity">Gingelly Oil (Rs 530/liter)</label>
-                    <input type="number" id="gingellyOilQuantity" data-price="530" min="0" value="0" class="product-quantity">
-                    <span class="text-sm text-gray-600">Litres</span>
-                    <span class="price-display">₹<span id="gingellyOilTotal">0</span></span>
+        <div id="securityQuestionSection" class="hidden fade-in">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Security Validation</h2>
+            <div class="space-y-4">
+                <div id="securityQuestionDisplay" class="text-lg font-medium text-gray-800"></div>
+                <select id="securityQuestionSelect" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </select>
+                <div>
+                    <label for="securityAnswer" class="block text-sm font-medium text-gray-700">Your Answer</label>
+                    <input type="text" id="securityAnswer" name="securityAnswer" required
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                 </div>
             </div>
+            <button id="answerQuestionBtn"
+                    class="mt-6 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:shadow-outline transition duration-200">
+                Submit Answer
+            </button>
+        </div>
 
-            <div class="total-section">
-                Total Amount: ₹<span id="grandTotal">0</span>
-            </div>
+        <form id="orderForm" class="hidden fade-in">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Your Order Details</h2>
+            <div class="space-y-4">
+                <input type="hidden" id="customerEmail" name="customerEmail">
+                <input type="hidden" id="customerName" name="customerName">
+                <input type="hidden" id="customerContact" name="customerContact">
+                <input type="hidden" id="blockName" name="blockName">
+                <input type="hidden" id="doorNumber" name="doorNumber">
 
-            <div class="notes-section">
-                <p>Please note: Quantities should be entered in whole numbers (Kgs/Litres). If you don't need a product, leave its quantity as 0.</p>
+                <div>
+                    <label for="purchaseDate" class="block text-sm font-medium text-gray-700">Order Date</label>
+                    <input type="text" id="purchaseDate" name="purchaseDate" readonly
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 sm:text-sm">
+                </div>
+
+                <div id="productsList">
+                    <h3 class="text-xl font-semibold text-gray-700 my-4">Select Products</h3>
+
+                    <div class="product-item flex items-center justify-between mb-4 p-3 border rounded-md shadow-sm">
+                        <img src="https://via.placeholder.com/80x80?text=Atta" alt="Sharbati Atta" class="w-20 h-20 object-cover mr-4">
+                        <label for="sharbatiAttaQuantity" class="flex-grow">Sharbati Atta - Stone Ground (Rs 100/kg)</label>
+                        <input type="number" id="sharbatiAttaQuantity" data-price="100" min="0" value="0" class="product-quantity w-20 text-center p-2 border border-gray-300 rounded-md">
+                        <span class="text-sm text-gray-600 ml-2">Kgs</span>
+                        <span class="price-display ml-4 font-semibold text-gray-800">₹<span id="sharbatiAttaTotal">0</span></span>
+                    </div>
+
+                    <div class="product-item flex items-center justify-between mb-4 p-3 border rounded-md shadow-sm">
+                        <img src="https://via.placeholder.com/80x80?text=Ragi" alt="Ragi Powder" class="w-20 h-20 object-cover mr-4">
+                        <label for="ragiPowderQuantity" class="flex-grow">Ragi Powder (Rs 120/kg)</label>
+                        <input type="number" id="ragiPowderQuantity" data-price="120" min="0" value="0" class="product-quantity w-20 text-center p-2 border border-gray-300 rounded-md">
+                        <span class="text-sm text-gray-600 ml-2">Kgs</span>
+                        <span class="price-display ml-4 font-semibold text-gray-800">₹<span id="ragiPowderTotal">0</span></span>
+                    </div>
+
+                    <div class="product-item flex items-center justify-between mb-4 p-3 border rounded-md shadow-sm">
+                        <img src="https://via.placeholder.com/80x80?text=Jowar" alt="Jowar Powder" class="w-20 h-20 object-cover mr-4">
+                        <label for="jowarPowderQuantity" class="flex-grow">Jowar Powder (Rs 90/kg)</label>
+                        <input type="number" id="jowarPowderQuantity" data-price="90" min="0" value="0" class="product-quantity w-20 text-center p-2 border border-gray-300 rounded-md">
+                        <span class="text-sm text-gray-600 ml-2">Kgs</span>
+                        <span class="price-display ml-4 font-semibold text-gray-800">₹<span id="jowarPowderTotal">0</span></span>
+                    </div>
+
+                    <div class="product-item flex items-center justify-between mb-4 p-3 border rounded-md shadow-sm">
+                        <img src="https://via.placeholder.com/80x80?text=Bajra" alt="Bajra Powder" class="w-20 h-20 object-cover mr-4">
+                        <label for="bajraPowderQuantity" class="flex-grow">Bajra Powder (Rs 80/kg)</label>
+                        <input type="number" id="bajraPowderQuantity" data-price="80" min="0" value="0" class="product-quantity w-20 text-center p-2 border border-gray-300 rounded-md">
+                        <span class="text-sm text-gray-600 ml-2">Kgs</span>
+                        <span class="price-display ml-4 font-semibold text-gray-800">₹<span id="bajraPowderTotal">0</span></span>
+                    </div>
+
+                    <div class="product-item flex items-center justify-between mb-4 p-3 border rounded-md shadow-sm">
+                        <img src="https://via.placeholder.com/80x80?text=Rice" alt="Rice Powder" class="w-20 h-20 object-cover mr-4">
+                        <label for="ricePowderQuantity" class="flex-grow">Rice Powder (Rs 70/kg)</label>
+                        <input type="number" id="ricePowderQuantity" data-price="70" min="0" value="0" class="product-quantity w-20 text-center p-2 border border-gray-300 rounded-md">
+                        <span class="text-sm text-gray-600 ml-2">Kgs</span>
+                        <span class="price-display ml-4 font-semibold text-gray-800">₹<span id="ricePowderTotal">0</span></span>
+                    </div>
+
+                    <div class="product-item flex items-center justify-between mb-4 p-3 border rounded-md shadow-sm">
+                        <img src="https://via.placeholder.com/80x80?text=Coconut" alt="Coconut Oil" class="w-20 h-20 object-cover mr-4">
+                        <label for="coconutOilQuantity" class="flex-grow">Coconut Oil (Rs 250/litre)</label>
+                        <input type="number" id="coconutOilQuantity" data-price="250" min="0" value="0" class="product-quantity w-20 text-center p-2 border border-gray-300 rounded-md">
+                        <span class="text-sm text-gray-600 ml-2">Litres</span>
+                        <span class="price-display ml-4 font-semibold text-gray-800">₹<span id="coconutOilTotal">0</span></span>
+                    </div>
+
+                    <div class="product-item flex items-center justify-between mb-4 p-3 border rounded-md shadow-sm">
+                        <img src="https://via.placeholder.com/80x80?text=Gingelly" alt="Gingelly Oil" class="w-20 h-20 object-cover mr-4">
+                        <label for="gingellyOilQuantity" class="flex-grow">Gingelly Oil (Rs 300/litre)</label>
+                        <input type="number" id="gingellyOilQuantity" data-price="300" min="0" value="0" class="product-quantity w-20 text-center p-2 border border-gray-300 rounded-md">
+                        <span class="text-sm text-gray-600 ml-2">Litres</span>
+                        <span class="price-display ml-4 font-semibold text-gray-800">₹<span id="gingellyOilTotal">0</span></span>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-md">
+                    <span class="text-lg font-bold text-gray-800">Grand Total:</span>
+                    <span class="text-2xl font-extrabold text-green-600">₹<span id="grandTotal">0</span></span>
+                </div>
+
+                <div class="mt-6 p-4 border border-blue-200 rounded-md bg-blue-50">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Subscription Options</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <label for="deliveryFrequency" class="block text-sm font-medium text-gray-700">Delivery Frequency (Optional)</label>
+                            <select id="deliveryFrequency" name="deliveryFrequency"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                <option value="">One-time order</option>
+                                <option value="Weekly">Weekly</option>
+                                <option value="Bi-Weekly">Bi-Weekly</option>
+                                <option value="Monthly">Monthly</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="orderNotes" class="block text-sm font-medium text-gray-700">Order Notes (Optional)</label>
+                            <textarea id="orderNotes" name="orderNotes" rows="3"
+                                      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <button type="submit"
-                    class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:shadow-outline transition duration-200">
+                    class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:shadow-outline transition duration-200 mt-6">
                 Place Order
             </button>
         </form>
     </div>
 
-<script>
-        // Set default purchase date to current IST
+    <script>
+        // *** IMPORTANT: REPLACE THIS WITH YOUR APPS SCRIPT WEB APP URL ***
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyzvVErdzOoKzCLrI8yuzj_dA4VPVO1yI5Hiw8lmWDdM-sCSBevFdzsYLdA66LhDJagqg/exec';
+
+        // DOM Elements
+        const messageArea = document.getElementById('messageArea');
+        const loginSection = document.getElementById('loginSection');
+        const validateBtn = document.getElementById('validateBtn');
+
+        const securityQuestionSection = document.getElementById('securityQuestionSection');
+        const securityQuestionDisplay = document.getElementById('securityQuestionDisplay');
+        const securityQuestionSelect = document.getElementById('securityQuestionSelect');
+        const securityAnswerInput = document.getElementById('securityAnswer');
+        const answerQuestionBtn = document.getElementById('answerQuestionBtn');
+
+        const orderFormSection = document.getElementById('orderForm'); // This is the form itself
+
+        // Hidden fields in the order form to carry validated user data
+        const customerEmailHidden = document.getElementById('customerEmail');
+        const customerNameHidden = document.getElementById('customerName'); // Will store the email as "Name" for now
+        const customerContactHidden = document.getElementById('customerContact'); // Will store the email as "Contact" for now
+        const blockNameHidden = document.getElementById('blockName');
+        const doorNumberHidden = document.getElementById('doorNumber');
+
+        // Store validated user data temporarily in session storage
+        // This allows refreshing the page without re-validating within the same session
+        let validatedUserData = JSON.parse(sessionStorage.getItem('validatedUserData')) || {};
+        let currentMemberId = sessionStorage.getItem('currentMemberId') || '';
+
+
+        // --- Utility Functions ---
+        function showMessage(type, message) {
+            messageArea.textContent = message;
+            messageArea.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700', 'bg-blue-100', 'text-blue-700');
+            if (type === 'error') {
+                messageArea.classList.add('bg-red-100', 'text-red-700');
+            } else if (type === 'success') {
+                messageArea.classList.add('bg-green-100', 'text-green-700');
+            } else { // info or warning
+                messageArea.classList.add('bg-blue-100', 'text-blue-700');
+            }
+            messageArea.classList.remove('hidden');
+            messageArea.scrollIntoView({ behavior: 'smooth' }); // Scroll to message
+        }
+
+        function hideMessage() {
+            messageArea.classList.add('hidden');
+        }
+
+        function showSection(sectionElement) {
+            loginSection.classList.add('hidden');
+            securityQuestionSection.classList.add('hidden');
+            orderFormSection.classList.add('hidden');
+            sectionElement.classList.remove('hidden');
+        }
+
+        // --- SHA-256 Hashing (Client-Side) ---
+        async function sha256(message) {
+            const textEncoder = new TextEncoder();
+            const data = textEncoder.encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hexHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hexHash;
+        }
+
+        // --- Form Initialization and Product Calculation ---
         document.addEventListener('DOMContentLoaded', () => {
             const purchaseDateInput = document.getElementById('purchaseDate');
-            // Get current time in IST
             const now = new Date();
             const options = {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                timeZoneName: 'short',
-                timeZone: 'Asia/Kolkata' // IST
+                year: 'numeric', month: 'long', day: 'numeric',
+                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                timeZoneName: 'short', timeZone: 'Asia/Kolkata'
             };
             purchaseDateInput.value = now.toLocaleString('en-IN', options);
 
@@ -243,7 +261,6 @@
             function calculateTotal() {
                 let grandTotal = 0;
                 productQuantities.forEach(input => {
-                    // Ensure the value is treated as a number; default to 0 if empty or invalid
                     const quantity = parseFloat(input.value) || 0;
                     const price = parseFloat(input.dataset.price);
                     const productTotal = quantity * price;
@@ -254,85 +271,302 @@
             }
 
             productQuantities.forEach(input => {
-                // Listen for 'input' event (real-time as user types, where supported)
                 input.addEventListener('input', calculateTotal);
-                // Listen for 'blur' event (when input loses focus, more reliable on some mobile devices)
                 input.addEventListener('blur', calculateTotal);
             });
 
-            // Initial calculation on page load
-            calculateTotal();
+            calculateTotal(); // Initial calculation
 
-            // Form Submission Logic
-            const orderForm = document.getElementById('orderForm');
-            orderForm.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent default form submission
+            // Check for existing validated session on page load
+            if (currentMemberId && validatedUserData.email && validatedUserData.blockName && validatedUserData.houseNumber) {
+                customerEmailHidden.value = validatedUserData.email;
+                customerNameHidden.value = validatedUserData.email;
+                customerContactHidden.value = validatedUserData.email;
+                blockNameHidden.value = validatedUserData.blockName;
+                doorNumberHidden.value = validatedUserData.houseNumber;
+                showSection(orderFormSection);
+                showMessage('info', 'Welcome back! You are logged in.');
+            } else {
+                showSection(loginSection); // Show login if not already validated
+            }
+        });
 
-                // Collect customer details
-                const customerEmail = document.getElementById('customerEmail').value;
-                const purchaseDate = document.getElementById('purchaseDate').value;
-                const customerName = document.getElementById('customerName').value;
-                const customerContact = document.getElementById('customerContact').value;
-                const blockName = document.getElementById('blockName').value;
-                const doorNumber = document.getElementById('doorNumber').value;
 
-                // Collect product details
-                let orderDetails = [];
-                productQuantities.forEach(input => {
-                    const quantity = parseFloat(input.value);
-                    if (quantity > 0) {
-                        // Extract product name from label or ID for better readability
-                        const labelElement = document.querySelector(`label[for="${input.id}"]`);
-                        let productName = labelElement ? labelElement.textContent.split('(')[0].trim() : input.id.replace('Quantity', '').replace(/([A-Z])/g, ' $1').trim();
+        // --- Login/Validation Logic ---
+        validateBtn.addEventListener('click', async () => {
+            hideMessage();
+            const email = document.getElementById('loginEmail').value.trim();
+            const blockName = document.getElementById('loginBlockName').value.trim();
+            const houseNumber = document.getElementById('loginDoorNumber').value.trim();
+            securityAnswerInput.value = ''; // Clear answer field
 
-                        const pricePerUnit = parseFloat(input.dataset.price);
-                        const productTotal = quantity * pricePerUnit;
-                        let productString = `${productName}: ${quantity} `;
+            if (!email || !blockName || !houseNumber) {
+                showMessage('error', 'Please fill in all identification fields.');
+                return;
+            }
 
-                        if (productName.includes('Oil')) { // Using includes as a simple check for oil
-                            productString += 'Litres';
-                        } else {
-                            productString += 'Kgs';
-                        }
-                        productString += ` @ ₹${pricePerUnit}/unit = ₹${productTotal.toFixed(0)}`;
+            // Store for later use in this session
+            validatedUserData = { email, blockName, houseNumber };
+            sessionStorage.setItem('validatedUserData', JSON.stringify(validatedUserData));
 
-                        // Removed the special handling for Sharbati Atta grind since the select element is removed
-                        // if (input.id === 'sharbatiAttaQuantity') {
-                        //     const grindOption = document.getElementById('sharbatiAttaGrind').value;
-                        //     productString += ` (${grindOption.charAt(0).toUpperCase() + grindOption.slice(1)} Ground)`;
-                        // }
 
-                        orderDetails.push(productString);
-                    }
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'validate_user',
+                        email,
+                        blockName,
+                        houseNumber
+                    }),
                 });
 
-                const grandTotal = document.getElementById('grandTotal').textContent;
+                const data = await response.json();
 
-                // Construct message for WhatsApp/Email
-                let message = `*1924 Mill Order Details*\n\n`;
-                message += `*Customer Details:*\n`;
-                message += `Email: ${customerEmail}\n`;
-                message += `Date: ${purchaseDate}\n`;
-                message += `Name: ${customerName}\n`;
-                message += `Contact: ${customerContact}\n`;
-                message += `Address: ${blockName}, ${doorNumber}\n\n`;
+                if (data.status === 'success') {
+                    showMessage('success', data.message);
+                    currentMemberId = data.memberId;
+                    sessionStorage.setItem('currentMemberId', currentMemberId);
 
-                message += `*Products Ordered:*\n`;
-                if (orderDetails.length > 0) {
-                    message += orderDetails.join('\n') + '\n\n';
+                    // Populate hidden fields in the order form
+                    customerEmailHidden.value = validatedUserData.email;
+                    customerNameHidden.value = validatedUserData.email; // Using email as name for now
+                    customerContactHidden.value = validatedUserData.email; // Using email as contact for now
+                    blockNameHidden.value = validatedUserData.blockName;
+                    doorNumberHidden.value = validatedUserData.houseNumber;
+
+                    // User is validated, show order form
+                    showSection(orderFormSection);
+                } else if (data.status === 'new_user_prompt_question' || data.status === 'set_new_question') {
+                    showMessage('info', data.message);
+                    currentMemberId = data.memberId;
+                    sessionStorage.setItem('currentMemberId', currentMemberId);
+
+                    securityQuestionDisplay.classList.add('hidden'); // Hide specific question display
+                    securityQuestionSelect.classList.remove('hidden'); // Show dropdown for selection
+
+                    // Populate dropdown with questions
+                    securityQuestionSelect.innerHTML = '<option value="">-- Select a question --</option>';
+                    data.questions.forEach((q, index) => {
+                        const option = document.createElement('option');
+                        option.value = q;
+                        option.textContent = q;
+                        securityQuestionSelect.appendChild(option);
+                    });
+                    showSection(securityQuestionSection);
+                } else if (data.status === 'ask_question') {
+                    showMessage('info', data.message);
+                    currentMemberId = data.memberId;
+                    sessionStorage.setItem('currentMemberId', currentMemberId);
+
+                    securityQuestionDisplay.textContent = data.question;
+                    securityQuestionDisplay.classList.remove('hidden'); // Show specific question display
+                    securityQuestionSelect.classList.add('hidden'); // Hide dropdown for selection
+
+                    showSection(securityQuestionSection);
+                } else if (data.status === 'incorrect_answer') {
+                    showMessage('error', data.message);
+                    // Re-display the question if they got it wrong
+                    securityQuestionDisplay.textContent = data.question;
+                    securityQuestionDisplay.classList.remove('hidden');
+                    securityQuestionSelect.classList.add('hidden');
+                    showSection(securityQuestionSection); // Stay on question section
                 } else {
-                    message += 'No products selected.\n\n';
+                    showMessage('error', data.message || 'An unknown error occurred during validation.');
                 }
 
-                message += `*Grand Total: ₹${grandTotal}*\n\n`;
-                message += `_Thank you for your order with 1924 Mill!_`;
-
-
-                const whatsappNumber = "919980988114"; // Archana's WhatsApp number
-                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-                window.open(whatsappUrl, '_blank');
-            });
+            } catch (error) {
+                console.error('Validation fetch error:', error);
+                showMessage('error', 'Could not connect to validation service. Please try again later.');
+            }
         });
+
+        // --- Security Question Answer Submission Logic ---
+        answerQuestionBtn.addEventListener('click', async () => {
+            hideMessage();
+            // Ensure we have the user data from the initial validation step
+            if (!validatedUserData.email || !validatedUserData.blockName || !validatedUserData.houseNumber) {
+                showMessage('error', 'User data missing. Please re-enter your details.');
+                showSection(loginSection); // Go back to login
+                return;
+            }
+
+            let selectedQuestion = securityQuestionDisplay.textContent; // For existing users being asked a specific question
+            if (!securityQuestionSelect.classList.contains('hidden')) {
+                // For new users choosing a question, or existing users setting one for the first time
+                selectedQuestion = securityQuestionSelect.value;
+            }
+            const answer = securityAnswerInput.value.trim();
+
+            if (!selectedQuestion || !answer) {
+                showMessage('error', 'Please select a question and provide an answer.');
+                return;
+            }
+
+            // Hash the answer before sending
+            const hashedAnswer = await sha256(answer);
+
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'register_question', // This action handles both setting and validating
+                        email: validatedUserData.email,
+                        blockName: validatedUserData.blockName,
+                        houseNumber: validatedUserData.houseNumber,
+                        securityQuestion: selectedQuestion,
+                        securityAnswerHash: hashedAnswer // Send the hash to Apps Script
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    showMessage('success', data.message);
+                    currentMemberId = data.memberId;
+                    sessionStorage.setItem('currentMemberId', currentMemberId);
+
+                    // Populate hidden fields for the order form
+                    customerEmailHidden.value = validatedUserData.email;
+                    customerNameHidden.value = validatedUserData.email;
+                    customerContactHidden.value = validatedUserData.email;
+                    blockNameHidden.value = validatedUserData.blockName;
+                    doorNumberHidden.value = validatedUserData.houseNumber;
+
+                    showSection(orderFormSection);
+                } else {
+                    showMessage('error', data.message || 'An error occurred while submitting your answer. Please try again.');
+                    securityAnswerInput.value = ''; // Clear answer field for retry
+                }
+
+            } catch (error) {
+                console.error('Answer submission fetch error:', error);
+                showMessage('error', 'Could not connect to verification service. Please try again later.');
+            }
+        });
+
+
+        // --- Order Submission Logic (Modified) ---
+        orderFormSection.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            hideMessage(); // Clear previous messages
+
+            // Basic validation for products
+            let anyProductSelected = false;
+            document.querySelectorAll('.product-quantity').forEach(input => {
+                if (parseFloat(input.value) > 0) {
+                    anyProductSelected = true;
+                }
+            });
+
+            if (!anyProductSelected) {
+                showMessage('error', 'Please select at least one product to place an order.');
+                return;
+            }
+
+            // Collect order details from the form
+            const purchaseDate = document.getElementById('purchaseDate').value;
+            const orderNotes = document.getElementById('orderNotes').value;
+            const deliveryFrequency = document.getElementById('deliveryFrequency').value;
+
+            let orderDetails = []; // For email body
+            let productsData = {}; // For Google Sheet
+
+            document.querySelectorAll('.product-quantity').forEach(input => {
+                const quantity = parseFloat(input.value) || 0;
+                productsData[input.id] = quantity; // Store with original ID
+
+                if (quantity > 0) {
+                    const labelElement = document.querySelector(`label[for="${input.id}"]`);
+                    let productName = labelElement ? labelElement.textContent.split('(')[0].trim() : input.id.replace('Quantity', '').replace(/([A-Z])/g, ' $1').trim();
+                    const pricePerUnit = parseFloat(input.dataset.price);
+                    const productTotal = quantity * pricePerUnit;
+                    let unitType = productName.includes('Oil') ? 'Litres' : 'Kgs';
+                    let productString = `${productName}: ${quantity} ${unitType} @ ₹${pricePerUnit}/unit = ₹${productTotal.toFixed(0)}`;
+                    orderDetails.push(productString);
+                }
+            });
+            const grandTotal = document.getElementById('grandTotal').textContent;
+
+            // Prepare data for Google Apps Script
+            const formData = {
+                action: 'submit_order', // New action for Apps Script
+                CustomerEmail: customerEmailHidden.value,
+                PurchaseDate: purchaseDate,
+                CustomerName: customerNameHidden.value, // This is currenty the email from validation.
+                CustomerContact: customerContactHidden.value, // This is currently the email from validation.
+                BlockName: blockNameHidden.value,
+                DoorNumber: doorNumberHidden.value,
+                OrderNotes: orderNotes,
+                DeliveryFrequency: deliveryFrequency,
+                GrandTotal: grandTotal,
+                OrderDetails: orderDetails // For email body
+            };
+
+            // Add product quantities to formData, converting client-side IDs to sheet headers
+            for (const key in productsData) {
+                const sheetHeaderKey = key.charAt(0).toUpperCase() + key.slice(1);
+                formData[sheetHeaderKey] = productsData[key];
+            }
+
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData),
+                });
+
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    showMessage('success', data.message + " You will receive a confirmation email shortly.");
+                    orderFormSection.reset(); // Clear the order form
+                    calculateTotal(); // Reset totals
+
+                    // Clear session storage and go back to login screen
+                    sessionStorage.removeItem('validatedUserData');
+                    sessionStorage.removeItem('currentMemberId');
+                    document.getElementById('loginEmail').value = '';
+                    document.getElementById('loginBlockName').value = '';
+                    document.getElementById('loginDoorNumber').value = '';
+                    document.getElementById('securityAnswer').value = '';
+                    showSection(loginSection);
+
+                    // Optional: Trigger WhatsApp message if still desired (user-initiated)
+                    const whatsappNumber = "919980988114"; // Archana's WhatsApp number
+                    let whatsappMessage = `*1924 Mill Order Details - Confirmation*\n\n` +
+                                          `*Customer Details:*\n` +
+                                          `Name: ${customerNameHidden.value}\n` +
+                                          `Contact: ${customerContactHidden.value}\n` +
+                                          `Address: ${blockNameHidden.value}, ${doorNumberHidden.value}\n\n` +
+                                          `*Products Ordered:*\n`;
+                    if (orderDetails.length > 0) {
+                        whatsappMessage += orderDetails.join('\n') + '\n\n';
+                    } else {
+                        whatsappMessage += 'No products selected.\n\n';
+                    }
+                    whatsappMessage += `*Grand Total: ₹${grandTotal}*\n\n` +
+                                       `_Thank you for your order with 1924 Mill! You will also receive an email confirmation._`;
+
+                    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+                    window.open(whatsappUrl, '_blank');
+
+                } else {
+                    showMessage('error', data.message || 'An error occurred during order submission. Please try again.');
+                }
+
+            } catch (error) {
+                console.error('Order submission fetch error:', error);
+                showMessage('error', 'Could not submit order. Please check your internet connection or try again later.');
+            }
+        });
+
     </script>
 </body>
 </html>
