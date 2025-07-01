@@ -324,6 +324,11 @@
                 });
 
                 const data = await response.json();
+                } catch (error) {
+                // This is the block that prints "TypeError: Failed to fetch"
+                console.error('Validation fetch error:', error);
+                showMessage('error', 'Could not connect to validation service. Please try again later.');
+            }
 
                 if (data.status === 'success') {
                     showMessage('success', data.message);
