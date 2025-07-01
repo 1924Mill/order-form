@@ -292,101 +292,96 @@
         });
 
 
-        // --- Login/Validation Logic ---
-        validateBtn.addEventListener('click', async () => {
-            hideMessage();
-            const email = document.getElementById('loginEmail').value.trim();
-            const blockName = document.getElementById('loginBlockName').value.trim();
-            const houseNumber = document.getElementById('loginDoorNumber').value.trim();
-            securityAnswerInput.value = ''; // Clear answer field
+// --- Login/Validation Logic ---
+            validateBtn.addEventListener('click', async () => {
+                hideMessage();
+                const email = document.getElementById('loginEmail').value.trim();
+                const blockName = document.getElementById('loginBlockName').value.trim();
+                const houseNumber = document.getElementById('loginDoorNumber').value.trim();
+                securityAnswerInput.value = ''; // Clear answer field
 
-            if (!email || !blockName || !houseNumber) {
-                showMessage('error', 'Please fill in all identification fields.');
-                return;
-            }
-
-            // Store for later use in this session
-            validatedUserData = { email, blockName, houseNumber };
-            sessionStorage.setItem('validatedUserData', JSON.stringify(validatedUserData));
-
-
-            try {
-                const response = await fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        action: 'validate_user',
-                        email,
-                        blockName,
-                        houseNumber
-                    }),
-                });
-
-                const data = await response.json();
-                } catch (error) {
-                // This is the block that prints "TypeError: Failed to fetch"
-                console.error('Validation fetch error:', error);
-                showMessage('error', 'Could not connect to validation service. Please try again later.');
-            }
-
-                if (data.status === 'success') {
-                    showMessage('success', data.message);
-                    currentMemberId = data.memberId;
-                    sessionStorage.setItem('currentMemberId', currentMemberId);
-
-                    // Populate hidden fields in the order form
-                    customerEmailHidden.value = validatedUserData.email;
-                    customerNameHidden.value = validatedUserData.email; // Using email as name for now
-                    customerContactHidden.value = validatedUserData.email; // Using email as contact for now
-                    blockNameHidden.value = validatedUserData.blockName;
-                    doorNumberHidden.value = validatedUserData.houseNumber;
-
-                    // User is validated, show order form
-                    showSection(orderFormSection);
-                } else if (data.status === 'new_user_prompt_question' || data.status === 'set_new_question') {
-                    showMessage('info', data.message);
-                    currentMemberId = data.memberId;
-                    sessionStorage.setItem('currentMemberId', currentMemberId);
-
-                    securityQuestionDisplay.classList.add('hidden'); // Hide specific question display
-                    securityQuestionSelect.classList.remove('hidden'); // Show dropdown for selection
-
-                    // Populate dropdown with questions
-                    securityQuestionSelect.innerHTML = '<option value="">-- Select a question --</option>';
-                    data.questions.forEach((q, index) => {
-                        const option = document.createElement('option');
-                        option.value = q;
-                        option.textContent = q;
-                        securityQuestionSelect.appendChild(option);
-                    });
-                    showSection(securityQuestionSection);
-                } else if (data.status === 'ask_question') {
-                    showMessage('info', data.message);
-                    currentMemberId = data.memberId;
-                    sessionStorage.setItem('currentMemberId', currentMemberId);
-
-                    securityQuestionDisplay.textContent = data.question;
-                    securityQuestionDisplay.classList.remove('hidden'); // Show specific question display
-                    securityQuestionSelect.classList.add('hidden'); // Hide dropdown for selection
-
-                    showSection(securityQuestionSection);
-                } else if (data.status === 'incorrect_answer') {
-                    showMessage('error', data.message);
-                    // Re-display the question if they got it wrong
-                    securityQuestionDisplay.textContent = data.question;
-                    securityQuestionDisplay.classList.remove('hidden');
-                    securityQuestionSelect.classList.add('hidden');
-                    showSection(securityQuestionSection); // Stay on question section
-                } else {
-                    showMessage('error', data.message || 'An unknown error occurred during validation.');
+                if (!email || !blockName || !houseNumber) {
+                    showMessage('error', 'Please fill in all identification fields.');
+                    return;
                 }
 
-            } catch (error) {
-                console.error('Validation fetch error:', error);
-                showMessage('error', 'Could not connect to validation service. Please try again later.');
-            }
-        });
+                // Store for later use in this session
+                validatedUserData = { email, blockName, houseNumber };
+                sessionStorage.setItem('validatedUserData', JSON.stringify(validatedUserData));
+
+
+                try { // <--- This 'try' block starts here
+                    const response = await fetch(APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            action: 'validate_user',
+                            email,
+                            blockName,
+                            houseNumber
+                        }),
+                    });
+
+                    const data = await response.json();
+
+                    if (data.status === 'success') {
+                        showMessage('success', data.message);
+                        currentMemberId = data.memberId;
+                        sessionStorage.setItem('currentMemberId', currentMemberId);
+                        
+                        // Populate hidden fields in the order form
+                        customerEmailHidden.value = validatedUserData.email;
+                        customerNameHidden.value = validatedUserData.email; // Using email as name for now
+                        customerContactHidden.value = validatedUserData.email; // Using email as contact for now
+                        blockNameHidden.value = validatedUserData.blockName;
+                        doorNumberHidden.value = validatedUserData.houseNumber;
+                        
+                        // User is validated, show order form
+                        showSection(orderFormSection);
+                    } else if (data.status === 'new_user_prompt_question' || data.status === 'set_new_question') {
+                        showMessage('info', data.message);
+                        currentMemberId = data.memberId;
+                        sessionStorage.setItem('currentMemberId', currentMemberId);
+
+                        securityQuestionDisplay.classList.add('hidden'); // Hide specific question display
+                        securityQuestionSelect.classList.remove('hidden'); // Show dropdown for selection
+
+                        // Populate dropdown with questions
+                        securityQuestionSelect.innerHTML = '<option value="">-- Select a question --</option>';
+                        data.questions.forEach((q, index) => {
+                            const option = document.createElement('option');
+                            option.value = q;
+                            option.textContent = q;
+                            securityQuestionSelect.appendChild(option);
+                        });
+                        showSection(securityQuestionSection);
+                    } else if (data.status === 'ask_question') {
+                        showMessage('info', data.message);
+                        currentMemberId = data.memberId;
+                        sessionStorage.setItem('currentMemberId', currentMemberId);
+
+                        securityQuestionDisplay.textContent = data.question;
+                        securityQuestionDisplay.classList.remove('hidden'); // Show specific question display
+                        securityQuestionSelect.classList.add('hidden'); // Hide dropdown for selection
+
+                        showSection(securityQuestionSection);
+                    } else if (data.status === 'incorrect_answer') {
+                        showMessage('error', data.message);
+                        // Re-display the question if they got it wrong
+                        securityQuestionDisplay.textContent = data.question;
+                        securityQuestionDisplay.classList.remove('hidden');
+                        securityQuestionSelect.classList.add('hidden');
+                        showSection(securityQuestionSection); // Stay on question section
+                    } else {
+                        showMessage('error', data.message || 'An unknown error occurred during validation.');
+                    }
+
+                } catch (error) { // <--- This 'catch' block ends here
+                    console.error('Validation fetch error:', error);
+                    showMessage('error', 'Could not connect to validation service. Please try again later.');
+                }
+            });
 
         // --- Security Question Answer Submission Logic ---
         answerQuestionBtn.addEventListener('click', async () => {
